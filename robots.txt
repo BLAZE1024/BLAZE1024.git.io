@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://BLAZE1024.github.io/world-of-cdramas/sitemap.xml

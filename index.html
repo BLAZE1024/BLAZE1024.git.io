@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A beginner's page about C-dramas and learning web development."
+    />
+    <title>World of Cdramas</title>
+    <meta
+      name="keywords"
+      content="C-dramas, Chinese dramas, TV shows, reviews, beginner web dev"
+    />
+    <link
+      rel="canonical"
+      href="https://BLAZE1024.github.io/world-of-cdramas/"
+    />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="World of Cdramas" />
+    <meta
+      property="og:description"
+      content="A beginner's page about C-dramas and learning web development."
+    />
+    <meta
+      property="og:image"
+      content="https://BLAZE1024.github.io/world-of-cdramas/whats-your-favorite-youth-drama-and-why-is-it-when-we-were-v0-ob8lj0zut8we1.webp"
+    />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="World of Cdramas" />
+    <meta
+      name="twitter:description"
+      content="A beginner's page about C-dramas and learning web development."
+    />
+    <meta
+      name="twitter:image"
+      content="https://BLAZE1024.github.io/world-of-cdramas/whats-your-favorite-youth-drama-and-why-is-it-when-we-were-v0-ob8lj0zut8we1.webp"
+    />
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "World of Cdramas",
+        "url": "https://BLAZE1024.github.io/world-of-cdramas/",
+        "description": "A beginner's page about C-dramas and learning web development."
+      }
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- TIER 1: HTML Basics Practice -->
+
+    <header>
+      <h1>My C-Drama Journey</h1>
+      <p>A beginner's guide to watching Chinese dramas</p>
+      <div class="controls">
+        <button id="themeToggle">Night mode</button>
+        <button id="loginBtn">Login</button>
+        <button id="registerBtn">Register</button>
+        <button id="logoutBtn" style="display: none">Logout</button>
+        <button
+          id="adminBtn"
+          style="display: none; background: #ff9800; color: white; border: none"
+        >
+          Admin Panel
+        </button>
+      </div>
+    </header>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" aria-labelledby="loginTitle">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="loginTitle">Login</h2>
+          <button id="closeLoginBtn" class="close-btn" aria-label="Close login">
+            &times;
+          </button>
+        </div>
+        <form id="loginForm">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="your@email.com"
+            required
+          />
+
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            required
+          />
+
+          <button type="submit">Sign in</button>
+        </form>
+        <p id="loginMessage" class="login-message"></p>
+      </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registerModal" class="modal" aria-labelledby="registerTitle">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="registerTitle">Create Account</h2>
+          <button
+            id="closeRegisterBtn"
+            class="close-btn"
+            aria-label="Close registration"
+          >
+            &times;
+          </button>
+        </div>
+        <form id="registerForm">
+          <label for="regName">Full Name</label>
+          <input
+            id="regName"
+            name="regName"
+            type="text"
+            placeholder="Your name"
+            required
+          />
+
+          <label for="regEmail">Email</label>
+          <input
+            id="regEmail"
+            name="regEmail"
+            type="email"
+            placeholder="your@email.com"
+            required
+          />
+
+          <label for="regPassword">Password</label>
+          <input
+            id="regPassword"
+            name="regPassword"
+            type="password"
+            placeholder="••••••••"
+            required
+          />
+
+          <label for="regConfirm">Confirm Password</label>
+          <input
+            id="regConfirm"
+            name="regConfirm"
+            type="password"
+            placeholder="••••••••"
+            required
+          />
+
+          <button type="submit" class="btn-register">Create Account</button>
+        </form>
+        <p id="registerMessage" class="register-message"></p>
+      </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="modal" aria-labelledby="adminTitle">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="adminTitle">Admin Panel</h2>
+          <button
+            id="closeAdminBtn"
+            class="close-btn"
+            aria-label="Close admin panel"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="admin-panel">
+          <p>Welcome Admin! Manage the site here.</p>
+          <div class="admin-stats">
+            <p>Total Reviews: <strong id="reviewCount">0</strong></p>
+            <p>Logged-in as: <strong id="adminEmail"></strong></p>
+          </div>
+          <button id="clearReviewsBtn" class="btn-danger">
+            Clear All Reviews
+          </button>
+          <button id="changeAdminPasswordBtn" class="btn-secondary">
+            Change Admin Password
+          </button>
+          <button id="logoutAdminBtn" class="btn-danger">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="changePasswordModal"
+      class="modal"
+      aria-labelledby="changePasswordTitle"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="changePasswordTitle">Change Admin Password</h2>
+          <button
+            id="closeChangePasswordBtn"
+            class="close-btn"
+            aria-label="Close change password"
+          >
+            &times;
+          </button>
+        </div>
+        <form id="changePasswordForm">
+          <label for="currentAdminPassword">Current Password</label>
+          <input
+            id="currentAdminPassword"
+            name="currentAdminPassword"
+            type="password"
+            placeholder="Current password"
+            required
+          />
+
+          <label for="newAdminPassword">New Password</label>
+          <input
+            id="newAdminPassword"
+            name="newAdminPassword"
+            type="password"
+            placeholder="New password"
+            required
+          />
+
+          <label for="confirmAdminPassword">Confirm New Password</label>
+          <input
+            id="confirmAdminPassword"
+            name="confirmAdminPassword"
+            type="password"
+            placeholder="Confirm new password"
+            required
+          />
+
+          <button type="submit" class="btn-register">Save Password</button>
+        </form>
+        <p id="changePasswordMessage" class="register-message"></p>
+      </div>
+    </div>
+
+    <div id="lockedMessage" class="locked-content">
+      <p>
+        <strong>Private content:</strong> please register or log in to view the
+        full page.
+      </p>
+    </div>
+
+    <main id="protectedContent" style="display: none">
+      <!-- Heading levels: h1 (biggest), h2, h3, h4, h5, h6 (smallest) -->
+      <h2>About Me</h2>
+      <p>
+        Hi! I'm exploring the world of C-dramas and learning web development at
+        the same time.
+      </p>
+
+      <!-- Paragraphs: use <p> for blocks of text -->
+      <p>
+        This page shows examples of basic HTML elements that every beginner
+        should know.
+      </p>
+
+      <!-- Links: <a> tag with href attribute -->
+      <h2>My Favorite Platforms</h2>
+      <p>Check out these sites to watch C-dramas:</p>
+      <ul>
+        <li><a href="https://www.viki.com">Viki</a> — streaming C-dramas</li>
+        <li>
+          <a href="https://www.netflix.com">Netflix</a> — has some C-dramas
+        </li>
+        <li>
+          <a href="https://www.crunchyroll.com">Crunchyroll</a> — anime & dramas
+        </li>
+      </ul>
+
+      <!-- Unordered list: <ul> with <li> items (bullet points) -->
+      <h2>Why I Love C-Dramas</h2>
+      <ul>
+        <li>Amazing storylines</li>
+        <li>Beautiful cinematography</li>
+        <li>Great acting and emotions</li>
+        <li>Cultural insights</li>
+      </ul>
+
+      <!-- Ordered list: <ol> with <li> items (numbered) -->
+      <h2>How to Get Started</h2>
+      <ol>
+        <li>Pick a streaming platform</li>
+        <li>Choose a drama with subtitles</li>
+        <li>Sit back and enjoy!</li>
+        <li>Join online communities to discuss</li>
+      </ol>
+
+      <!-- Gallery with Posts -->
+      <h2>Gallery</h2>
+      <div id="galleryPosts" class="gallery-container"></div>
+
+      <!-- Add New Post Section -->
+      <div class="add-post-section">
+        <h3>Share a New Post</h3>
+        <form id="addPostForm">
+          <label for="postImageFile">Choose Image</label>
+          <input
+            id="postImageFile"
+            name="postImageFile"
+            type="file"
+            accept="image/*"
+            required
+          />
+          <label for="postCaption">Caption (optional)</label>
+          <input
+            id="postCaption"
+            name="postCaption"
+            type="text"
+            placeholder="Add a caption... (you can add it later too)"
+          />
+          <button type="submit">Upload Post</button>
+        </form>
+      </div>
+
+      <!-- More paragraphs with text -->
+      <h3>My Current Favorites</h3>
+      <p>
+        I'm watching several shows right now. Each one has unique characters and
+        plots that keep me engaged.
+      </p>
+
+      <!-- Reviews form -->
+      <section aria-labelledby="reviews-heading">
+        <h2 id="reviews-heading">Leave a mini review</h2>
+        <form id="reviewForm">
+          <label for="name">Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Your name"
+            required
+          />
+
+          <label for="rating">Rating</label>
+          <select id="rating" name="rating">
+            <option value="5">5 — Loved it</option>
+            <option value="4">4 — Very good</option>
+            <option value="3">3 — Okay</option>
+            <option value="2">2 — Not great</option>
+            <option value="1">1 — Didn't like it</option>
+          </select>
+
+          <label for="review">Review</label>
+          <textarea
+            id="review"
+            name="review"
+            rows="4"
+            placeholder="Short thoughts..."
+            required
+          ></textarea>
+
+          <button type="submit">Submit review</button>
+        </form>
+
+        <h3>Recent Mini-Reviews</h3>
+        <ul id="reviewsList" aria-live="polite"></ul>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
